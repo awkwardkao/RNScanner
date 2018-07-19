@@ -23,6 +23,8 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		232BAFF5CF6048748F0F92D3 /* libRNVersionNumber.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CC9DCEEE13414EA3DFFAC4 /* libRNVersionNumber.a */; };
+		25642FAC2100B97B00DBEA39 /* AVFScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25642FAB2100B97B00DBEA39 /* AVFScanner.swift */; };
+		25642FAD2100B97B00DBEA39 /* AVFScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25642FAB2100B97B00DBEA39 /* AVFScanner.swift */; };
 		25EF1E5120F9B77D00459054 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EF1E5020F9B77D00459054 /* ScannerView.swift */; };
 		25EF1E5320F9B85500459054 /* ScannerViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EF1E5220F9B85500459054 /* ScannerViewManager.swift */; };
 		25EF1E5520F9BD2200459054 /* ScannerViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25EF1E5420F9BD2200459054 /* ScannerViewManager.m */; };
@@ -355,6 +357,8 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RNSCanner/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RNSCanner/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		25642FAA2100B97A00DBEA39 /* RNSCannerTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNSCannerTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		25642FAB2100B97B00DBEA39 /* AVFScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFScanner.swift; sourceTree = "<group>"; };
 		25EF1E4F20F9B77C00459054 /* RNSCanner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNSCanner-Bridging-Header.h"; sourceTree = "<group>"; };
 		25EF1E5020F9B77D00459054 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		25EF1E5220F9B85500459054 /* ScannerViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewManager.swift; sourceTree = "<group>"; };
@@ -568,6 +572,8 @@
 				25EF1E4F20F9B77C00459054 /* RNSCanner-Bridging-Header.h */,
 				25EF1E5220F9B85500459054 /* ScannerViewManager.swift */,
 				25EF1E5420F9BD2200459054 /* ScannerViewManager.m */,
+				25642FAB2100B97B00DBEA39 /* AVFScanner.swift */,
+				25642FAA2100B97A00DBEA39 /* RNSCannerTests-Bridging-Header.h */,
 			);
 			path = CodeScanner;
 			sourceTree = "<group>";
@@ -750,6 +756,7 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = L592V8MTL4;
+						LastSwiftMigration = 0940;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
@@ -1188,6 +1195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25642FAD2100B97B00DBEA39 /* AVFScanner.swift in Sources */,
 				00E356F31AD99517003FC87E /* RNSCannerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1198,6 +1206,7 @@
 			files = (
 				25EF1E5120F9B77D00459054 /* ScannerView.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				25642FAC2100B97B00DBEA39 /* AVFScanner.swift in Sources */,
 				25EF1E5520F9BD2200459054 /* ScannerViewManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				25EF1E5320F9B85500459054 /* ScannerViewManager.swift in Sources */,
@@ -1252,6 +1261,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = L592V8MTL4;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1274,6 +1284,9 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CodeScanner/RNSCannerTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RNSCanner.app/RNSCanner";
 			};
 			name = Debug;
@@ -1282,6 +1295,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = L592V8MTL4;
 				HEADER_SEARCH_PATHS = (
@@ -1301,6 +1315,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CodeScanner/RNSCannerTests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RNSCanner.app/RNSCanner";
 			};
 			name = Release;
