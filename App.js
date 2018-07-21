@@ -36,7 +36,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <ScannerComponent style={{flex: 2}} />
+        <ScannerComponent style={styles.container} />
       </View>
       
     );
@@ -46,8 +46,10 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    resizeMode: 'stretch',
     backgroundColor: '#F5FCFF',
   },
   welcome: {
@@ -59,5 +61,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  container1: {
+      flex: 1,
+      flexDirection: 'row',
+      backgroundColor: 'blue'
+  },
+  container2: {
+      flex: 1,
+      flexDirection: 'row',
+      backgroundColor: 'green',
   },
 });
