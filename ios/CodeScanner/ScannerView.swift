@@ -16,6 +16,14 @@ import AVFoundation
 
 class ScannerView: UIView {
   
+  var codeScanner: AVFScanner?
+  
+  var scanValue : String? {
+    get {
+      return "AAA"//codeScanner?.scanValue
+    }
+  }
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     
@@ -23,9 +31,18 @@ class ScannerView: UIView {
     //label.text = "This is Swift"
     //self.addSubview(label)
     
-    let codeScanner = AVFScanner()
-    self.addSubview(codeScanner.view)
+    print("init")
+    codeScanner = AVFScanner()
+    print(codeScanner)
+    //codeScanner.view.frame = self.bounds
+    self.addSubview(codeScanner!.view)
     
+  }
+  
+  func doScan() {
+    print("call dos can on scanview")
+    print(codeScanner)
+    codeScanner?.doScan()
   }
   
   required init?(coder aDecoder: NSCoder) {

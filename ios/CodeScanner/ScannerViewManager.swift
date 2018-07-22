@@ -15,4 +15,13 @@ class ScannerViewManager : RCTViewManager {
   override func view() -> UIView! {
     return ScannerView()
   }
+  
+  func doScanViaManager(_ node:NSNumber) {
+    print("doScanViaManager")
+    DispatchQueue.main.async {
+      print("dispatch Queue For DoScan")
+      let sview = self.bridge.uiManager.view(forReactTag: node) as! ScannerView
+      sview.doScan()
+    }
+  }
 }

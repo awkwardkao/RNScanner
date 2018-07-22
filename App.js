@@ -7,9 +7,9 @@
  */
 
 import React, {Component} from 'react';
-import {
-  Platform, 
-  StyleSheet, 
+import ReactNative,{
+  Platform,
+  StyleSheet,
   Text,
   View,
   requireNativeComponent,
@@ -36,20 +36,37 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <ScannerComponent style={styles.container} />
+        <ScannerComponent  style={styles.container} 
+         ref={(component) => this.scannerComponentInstance = component } />
+
+        <TouchableOpacity onPress={this.onButtonClick.bind(this)}>
+          <Text style={styles.button}>{'StartScan'}</Text>
+        </TouchableOpacity>
+       
       </View>
       
     );
   }
+
+  onButtonClick(e) { 
+    console.log(UIManager);
+    UIManager.dispatchViewManagerCommand(
+      ReactNative.findNodeHandle(this.scannerComponentInstance),
+      UIManager.ScannerView.Commands.doScanViaManager,
+      []
+    );
+  }
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    resizeMode: 'stretch',
+
     backgroundColor: '#F5FCFF',
   },
   welcome: {
@@ -63,13 +80,28 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   container1: {
-      flex: 1,
-      flexDirection: 'row',
-      backgroundColor: 'blue'
+    position: 'relatvie',
+    bottom: 200,
+    left: 10,
+    right: 10,
+    top: 10
   },
   container2: {
       flex: 1,
       flexDirection: 'row',
       backgroundColor: 'green',
   },
+  scanHeight: {
+    flex: 0.8,
+    backgroundColor: '#FF3366'
+  },
+  button: {
+    marginTop: 50,
+    width: 120,
+    height: 60,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#F0F',
+    backgroundColor: "#FFF"
+  }
 });

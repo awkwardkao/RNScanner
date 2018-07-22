@@ -12,6 +12,8 @@
 
 @interface RCT_EXTERN_MODULE (ScannerViewManager,RCTViewManager)
 
+RCT_EXPORT_VIEW_PROPERTY(scanValue, NSString)
+RCT_EXTERN_METHOD(doScanViaManager:(nonnull NSNumber *)node)
 
 
 @end

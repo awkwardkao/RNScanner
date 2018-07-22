@@ -2,7 +2,7 @@
 //  AVFScanner.swift
 //  RNSCanner
 //
-//  Created by jacokao on 2018/7/19.
+//  Created by jeff on 2018/7/19.
 //  Copyright © 2018年 Facebook. All rights reserved.
 //
 
@@ -17,18 +17,33 @@ class AVFScanner : UIViewController, AVCaptureMetadataOutputObjectsDelegate {
   var codeFrameView: UIView?
   var messageLabel : UILabel?
   
+  var timer: Timer?
+  
+  var isReading = false
+  
+  var scanValue:String?
+  
+  
  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     print("DidLoad")
-    
+    scanValue = "---"
+    captureSession = nil
+    //previewLayer.layer.cornerRadius = 5;
+  }
+  
+  
+  
+  func startReading() -> Bool {
+    print("Start Reading()")
     // initial background color
-    view.backgroundColor = UIColor.black
+    //view.backgroundColor = UIColor.black
     
     // get camera device
     let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
     
+    // set session and input
     do {
       
       let input = try AVCaptureDeviceInput(device: captureDevice)
@@ -36,27 +51,31 @@ class AVFScanner : UIViewController, AVCaptureMetadataOutputObjectsDelegate {
       captureSession?.addInput(input)
       
     } catch let error as NSError {
-      
       print (error)
-      
+      return false
     }
     
-    let messageLabel = UILabel(frame: CGRect(x:5, y:5, width:100, height:50))
-    messageLabel.text = "-------"
-    //view.addSubview(messageLabel)
-    
-    let btn = UIButton(frame: CGRect(x:5,y:5,width:50,height:50))
-    //btn.titleLabel?.text = "start scanning"
-    btn.setTitle("SCAN", for: .normal)
-    //btn.addTarget(self, action:#selector(self.buttonClicked), for: .touchUpInside)
-    view.addSubview(btn)
+    messageLabel = UILabel(frame: CGRect(x:5, y:5, width:100, height:50))
+    messageLabel!.text = "no qrcode"
+    view.addSubview(messageLabel!)
     
     
+    
+    // set preview
     previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-    previewLayer.frame = CGRect(x:view.frame.width * 0.1 , y:view.frame.height * 0.1, width:view.frame.width * 0.7 , height:view.frame.height * 0.7) //view.layer.bounds
+    previewLayer.cornerRadius = 5
+    previewLayer.frame = CGRect(x:0 , y:0, width:view.frame.width , height:view.frame.height) //view.layer.bounds
+    
     view.layer.addSublayer(previewLayer)
     
+    codeFrameView = UILabel()
+    codeFrameView?.layer.borderColor = UIColor.green.cgColor
+    codeFrameView?.layer.borderWidth = 2
+    view.addSubview(codeFrameView!)
+    view.bringSubview(toFront: codeFrameView!)
+    
+    // set ouptut result
     let captureMetadataOutput = AVCaptureMetadataOutput()
     captureSession?.addOutput(captureMetadataOutput)
     
@@ -65,70 +84,30 @@ class AVFScanner : UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     print(captureMetadataOutput.availableMetadataObjectTypes)
     captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
     
-    print(captureMetadataOutput)
-    
-    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(AVFScanner.updateTimer), userInfo: nil, repeats: true)
-    
+    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(AVFScanner.updateTime), userInfo: nil, repeats: true)
     
     captureSession?.startRunning()
-    
-    
-    /*
-    let videoCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
-    do {
-      let input = try AVCaptureDeviceInput(device: videoCaptureDevice)
-      
-      captureSession = AVCaptureSession()
-      captureSession?.addInput(input)
-      
-      codeFrameView = UIView()
-      if let codeFrameView = codeFrameView {
-        codeFrameView.layer.borderColor = UIColor.green.cgColor
-        codeFrameView.layer.borderWidth = 2
-        codeFrameView.layer.frame = CGRect(x:30 , y:100, width:view.frame.width * 0.5 , height:view.frame.height * 0.5)
-        
-        view.addSubview(codeFrameView)
-        view.bringSubview(toFront: codeFrameView)
-        
-      }
-      
-      let label = UILabel(frame: CGRect(x:5, y:5, width:100, height:50))
-      label.text = "-------"
-      view.addSubview(label)
-      
-      
-    } catch {
-      print(error)
-      return
-    }
-    
-    let captureMetadataOutput = AVCaptureMetadataOutput()
-    captureSession?.addOutput(captureMetadataOutput)
-    
-    captureMetadataOutput.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue()) //DispatchQueue.main)
-    captureMetadataOutput.metadataObjectTypes = captureMetadataOutput.availableMetadataObjectTypes //[AVMetadataObjectTypeQRCode]
-    
-    previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-    previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-    previewLayer?.frame = CGRect(x:10 , y:60, width:view.frame.width * 0.7 , height:view.frame.height * 0.7) //view.layer.bounds
-    view.layer.addSublayer(previewLayer)
-    
-    captureSession.startRunning()*/
+    return true
   }
   
-  func updateTimer() {
-    print("update")
+  func stopReading() {
+    captureSession?.stopRunning()
+    captureSession = nil
+    previewLayer.removeFromSuperlayer()
+    timer?.invalidate()
+    
   }
   
-  func buttonClicked() {
-    print("Button Clicked")
+  // for keep
+  func updateTime() {
+    //print(Date())
   }
   
-  
+  // must add for keep session runn
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    if (captureSession.isRunning == false) {
+    if (captureSession?.isRunning == false) {
       captureSession.startRunning();
     }
   }
@@ -136,7 +115,7 @@ class AVFScanner : UIViewController, AVCaptureMetadataOutputObjectsDelegate {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
-    if (captureSession.isRunning == true) {
+    if (captureSession?.isRunning == true) {
       captureSession.stopRunning();
     }
   }
@@ -147,8 +126,19 @@ class AVFScanner : UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     // Dispose of any resources that can be recreated.
   }
 
+  // on ouptut result process
+  // for swift 3.0
   func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
-      print("log")
+      print("capture Output")
+    
+    //captureSession.stopRunning();
+    
+    if metadataObjects == nil {
+      codeFrameView?.frame = CGRect.zero
+    } else  {
+      codeFrameView?.frame = view.layer.bounds//CGRect(x:view.frame.width * 0.1 , y:view.frame.height * 0.1, width:view.frame.width * 0.5 , height:view.frame.height  * 0.5)
+    }
+    
     for data in metadataObjects {
       let metaData = data as! AVMetadataObject
       print(metaData.description)
@@ -158,60 +148,25 @@ class AVFScanner : UIViewController, AVCaptureMetadataOutputObjectsDelegate {
       if let unwraped = transformed {
         print(unwraped.stringValue)
         
+        messageLabel?.text = "Value"
         messageLabel?.text = unwraped.stringValue
         print("result :"+unwraped.stringValue)
-        //btnStartStop.setTitle("Start", for: .normal)
-        
-        //self.performSelector(onMainThread: #selector(stopReading), with: nil, waitUntilDone: false)
-        //isReading = false
+        scanValue = unwraped.stringValue
+        self.performSelector(onMainThread: #selector(stopReading), with: nil, waitUntilDone: false)
+        isReading = false
       }
     }
+    
+    //captureSession.startRunning()
   }
-  func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-    for data in metadataObjects {
-      let metaData = data //as! AVMetadataObject
-      print(metaData.description)
-      
-      let transformed = previewLayer?.transformedMetadataObject(for: metaData) as? AVMetadataMachineReadableCodeObject
-      
-      if let unwraped = transformed {
-        print(unwraped.stringValue)
-        
-        messageLabel?.text = unwraped.stringValue
-        print("result :"+unwraped.stringValue)
-        //btnStartStop.setTitle("Start", for: .normal)
-        
-        //self.performSelector(onMainThread: #selector(stopReading), with: nil, waitUntilDone: false)
-        //isReading = false
-      }
+  
+  func doScan() {
+    print("doscan")
+    if(self.startReading()) {
+      print("staring...scan")
+    } else {
+      print("can't start scan")
     }
   }
   
-  //func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
-  //func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-   // captureSession.stopRunning()
-    
-   // messageLabel?.text = "Receive Data"
-    
-    /*
-    if metadataObjects == nil || metadataObjects.count == 0 {
-      codeFrameView?.frame = CGRect.zero
-      messageLabel?.text = "No Code is detected"
-      return
-      
-    }
- */
-    
-   // let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-   // let codeObject = previewLayer?.transformedMetadataObject(for: metadataObj)
-    
-    //codeFrameView?.frame = codeObject!.bounds
-    
-    //if metadataObj.stringValue != nil {
-    //  messageLabel?.text = metadataObj.stringValue
-   // }
-    
-    
-    
-  //}
 }
