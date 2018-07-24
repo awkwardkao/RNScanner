@@ -25,6 +25,10 @@
 		232BAFF5CF6048748F0F92D3 /* libRNVersionNumber.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CC9DCEEE13414EA3DFFAC4 /* libRNVersionNumber.a */; };
 		25642FAC2100B97B00DBEA39 /* AVFScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25642FAB2100B97B00DBEA39 /* AVFScanner.swift */; };
 		25642FAD2100B97B00DBEA39 /* AVFScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25642FAB2100B97B00DBEA39 /* AVFScanner.swift */; };
+		257803BA2105FA5C00B572A7 /* EventEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257803B92105FA5C00B572A7 /* EventEmitter.swift */; };
+		257803BC2105FAAB00B572A7 /* EventEmitterBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 257803BB2105FAAB00B572A7 /* EventEmitterBridge.m */; };
+		25B7359A2107C4FB00D7C20E /* ResultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B735992107C4FB00D7C20E /* ResultManager.m */; };
+		25B7359C2107C5EC00D7C20E /* ResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B7359B2107C5EC00D7C20E /* ResultManager.swift */; };
 		25EF1E5120F9B77D00459054 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EF1E5020F9B77D00459054 /* ScannerView.swift */; };
 		25EF1E5320F9B85500459054 /* ScannerViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EF1E5220F9B85500459054 /* ScannerViewManager.swift */; };
 		25EF1E5520F9BD2200459054 /* ScannerViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25EF1E5420F9BD2200459054 /* ScannerViewManager.m */; };
@@ -359,6 +363,10 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		25642FAA2100B97A00DBEA39 /* RNSCannerTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNSCannerTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		25642FAB2100B97B00DBEA39 /* AVFScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFScanner.swift; sourceTree = "<group>"; };
+		257803B92105FA5C00B572A7 /* EventEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEmitter.swift; sourceTree = "<group>"; };
+		257803BB2105FAAB00B572A7 /* EventEmitterBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventEmitterBridge.m; sourceTree = "<group>"; };
+		25B735992107C4FB00D7C20E /* ResultManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultManager.m; sourceTree = "<group>"; };
+		25B7359B2107C5EC00D7C20E /* ResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultManager.swift; sourceTree = "<group>"; };
 		25EF1E4F20F9B77C00459054 /* RNSCanner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNSCanner-Bridging-Header.h"; sourceTree = "<group>"; };
 		25EF1E5020F9B77D00459054 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		25EF1E5220F9B85500459054 /* ScannerViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewManager.swift; sourceTree = "<group>"; };
@@ -574,6 +582,10 @@
 				25EF1E5420F9BD2200459054 /* ScannerViewManager.m */,
 				25642FAB2100B97B00DBEA39 /* AVFScanner.swift */,
 				25642FAA2100B97A00DBEA39 /* RNSCannerTests-Bridging-Header.h */,
+				257803B92105FA5C00B572A7 /* EventEmitter.swift */,
+				257803BB2105FAAB00B572A7 /* EventEmitterBridge.m */,
+				25B735992107C4FB00D7C20E /* ResultManager.m */,
+				25B7359B2107C5EC00D7C20E /* ResultManager.swift */,
 			);
 			path = CodeScanner;
 			sourceTree = "<group>";
@@ -1204,9 +1216,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				257803BC2105FAAB00B572A7 /* EventEmitterBridge.m in Sources */,
+				257803BA2105FA5C00B572A7 /* EventEmitter.swift in Sources */,
 				25EF1E5120F9B77D00459054 /* ScannerView.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				25B7359C2107C5EC00D7C20E /* ResultManager.swift in Sources */,
 				25642FAC2100B97B00DBEA39 /* AVFScanner.swift in Sources */,
+				25B7359A2107C4FB00D7C20E /* ResultManager.m in Sources */,
 				25EF1E5520F9BD2200459054 /* ScannerViewManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				25EF1E5320F9B85500459054 /* ScannerViewManager.swift in Sources */,

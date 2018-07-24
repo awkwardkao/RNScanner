@@ -20,7 +20,9 @@ class ScannerView: UIView {
   
   var scanValue : String? {
     get {
-      return "AAA"//codeScanner?.scanValue
+      print("call scan value ")
+      
+      return codeScanner?.scanValue
     }
   }
   
@@ -33,16 +35,27 @@ class ScannerView: UIView {
     
     print("init")
     codeScanner = AVFScanner()
-    print(codeScanner)
+    //print(codeScanner)
     //codeScanner.view.frame = self.bounds
     self.addSubview(codeScanner!.view)
     
   }
   
-  func doScan() {
+  func doScan() -> Bool {
     print("call dos can on scanview")
     print(codeScanner)
-    codeScanner?.doScan()
+    return codeScanner!.doScan()
+  }
+  
+  func getMode() -> Int {
+    print("mode ")
+    print(codeScanner!.mode)
+    return codeScanner!.mode
+  }
+  
+  func doTouchlight() {
+    print("call do touch light")
+    codeScanner?.touchLight()
   }
   
   required init?(coder aDecoder: NSCoder) {

@@ -14,6 +14,12 @@
 
 RCT_EXPORT_VIEW_PROPERTY(scanValue, NSString)
 RCT_EXTERN_METHOD(doScanViaManager:(nonnull NSNumber *)node)
+RCT_EXTERN_METHOD(doTouchLightViaManager:(nonnull NSNumber *)node)
+
+
+RCT_EXTERN_METHOD(fetchScanCode:(nonnull NSNumber *)node resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseResolveBlock)reject)
+
+//RCT_EXTERN_METHOD(callScanViaManager:(RCTPromiseResolveBlock)resolve   rejecter:(RCTPromiseRejectBlock)reject))
 
 
 @end

@@ -11,14 +11,18 @@ import ReactNative,{
   Platform,
   StyleSheet,
   Text,
+  TextInput,
   View,
   requireNativeComponent,
+  NativeModules,
   TouchableOpacity,
   UIManager
 } from 'react-native';
 import VersionNumber from 'react-native-version-number';
 
 const ScannerComponent = requireNativeComponent('ScannerView');
+const {ResultManager} = NativeModules;
+
 
 
 const instructions = Platform.select({
@@ -38,9 +42,19 @@ export default class App extends Component<Props> {
       <View style={styles.container}>
         <ScannerComponent  style={styles.container} 
          ref={(component) => this.scannerComponentInstance = component } />
+        <TextInput
+         editable={false}
+         defaultValue={"-----"}
+         ref={component => this._textInput = component}>
+         
+        </TextInput>
 
-        <TouchableOpacity onPress={this.onButtonClick.bind(this)}>
-          <Text style={styles.button}>{'StartScan'}</Text>
+        <TouchableOpacity onPress={this.onButtonClickLight.bind(this)}>
+          <Text style={styles.button}>{'TouchLight'}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.onButtonClickPromise.bind(this)}>
+          <Text style={styles.button}>{'Promise'}</Text>
         </TouchableOpacity>
        
       </View>
@@ -49,12 +63,71 @@ export default class App extends Component<Props> {
   }
 
   onButtonClick(e) { 
-    console.log(UIManager);
+    //console.log(UIManager);
     UIManager.dispatchViewManagerCommand(
       ReactNative.findNodeHandle(this.scannerComponentInstance),
       UIManager.ScannerView.Commands.doScanViaManager,
       []
     );
+  }
+
+  onButtonClickLight(e) { 
+    //console.log(UIManager);
+    UIManager.dispatchViewManagerCommand(
+      ReactNative.findNodeHandle(this.scannerComponentInstance),
+      UIManager.ScannerView.Commands.doTouchLightViaManager,
+      []
+    );
+  }
+
+  onButtonClickPromise(e) { 
+    //console.log(UIManager);
+    /*UIManager.dispatchViewManagerCommand(
+      ReactNative.findNodeHandle(this.scannerComponentInstance),
+      UIManager.ScannerView.Commands.fetchScanCode,
+      []
+    ).then( (response) => {
+      console.log(reponse);
+    }).catch((error) => {
+      console.log(error);
+    });*/
+    //SC.fetchScanCode(ReactNative.findNodeHandle(this.scannerComponentInstance),
+    //                               (response)=> console.log(response),(response,err) => console.log(err));
+  
+    //this._textInput.setNativeProps({text:"start scanning"})
+    
+    UIManager.dispatchViewManagerCommand(
+      ReactNative.findNodeHandle(this.scannerComponentInstance),
+      UIManager.ScannerView.Commands.fetchScanCode,
+      [
+        
+        function(response) {
+          console.log(response); 
+          this._textInput.setNativeProps({text:"Get Value"});
+        },
+        function(response,err) {console.log(err);}
+      ]);
+
+      
+
+      this._textInput.setNativeProps({text:"start scanning"});
+
+      ResultManager.checkValue(200000)
+      .then(
+        (response) => this._textInput.setNativeProps({text:response}) 
+      )
+      .catch(
+        (response,err) => console.log(err)
+      ); 
+      
+  }
+
+  success(msg) {
+    console.log(msg);
+  }
+
+  fail(msg) {
+    console.log(msg);
   }
 }
 
