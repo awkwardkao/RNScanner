@@ -2,7 +2,7 @@
 //  ResultManager.swift
 //  RNSCanner
 //
-//  Created by jacokao on 2018/7/25.
+//  Created by jeff on 2018/7/25.
 //  Copyright © 2018年 Facebook. All rights reserved.
 //
 

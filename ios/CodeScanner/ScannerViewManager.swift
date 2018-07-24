@@ -2,7 +2,7 @@
 //  ScannerViewManager.swift
 //  RNSCanner
 //
-//  Created by jacokao on 2018/7/14.
+//  Created by jeff on 2018/7/14.
 //  Copyright © 2018年 Facebook. All rights reserved.
 //
 
@@ -57,28 +57,6 @@ class ScannerViewManager : RCTViewManager {
       sview.doScan()
     }
     
-    /*
     
-    var mode = -1
-    while(mode != 2) {
-      mode = sview.getMode()
-      print(mode)
-      if(mode == 2) {
-        break      }
-      print(mode)
-    }
-    print("scan value ")
-    print(sview.scanValue)
-    resolve(sview.scanValue)
- */
-    /*
-    if(sview.doScan()) {
-      print("call resolve")
-      print(resolve)
-      resolve(1)
-    } else {
-      print("call rject")
-      reject("-9","fail",nil)
-    }*/
   }
 }
