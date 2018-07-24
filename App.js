@@ -40,22 +40,24 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <ScannerComponent  style={styles.container} 
+        <ScannerComponent style={styles.scanWindow}
          ref={(component) => this.scannerComponentInstance = component } />
-        <TextInput
-         editable={false}
-         defaultValue={"-----"}
-         ref={component => this._textInput = component}>
-         
-        </TextInput>
+        <View style={styles.container2}>
+          <TextInput
+          editable={false}
+          defaultValue={"-----"}
+          ref={component => this._textInput = component}>
+          
+          </TextInput>
 
-        <TouchableOpacity onPress={this.onButtonClickLight.bind(this)}>
-          <Text style={styles.button}>{'TouchLight'}</Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={this.onButtonClickLight.bind(this)}>
+            <Text style={styles.button}>{'燈光'}</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.onButtonClickPromise.bind(this)}>
-          <Text style={styles.button}>{'Promise'}</Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={this.onButtonClickPromise.bind(this)}>
+            <Text style={styles.button}>{'掃瞄'}</Text>
+          </TouchableOpacity>
+        </View>
        
       </View>
       
@@ -81,21 +83,9 @@ export default class App extends Component<Props> {
   }
 
   onButtonClickPromise(e) { 
-    //console.log(UIManager);
-    /*UIManager.dispatchViewManagerCommand(
-      ReactNative.findNodeHandle(this.scannerComponentInstance),
-      UIManager.ScannerView.Commands.fetchScanCode,
-      []
-    ).then( (response) => {
-      console.log(reponse);
-    }).catch((error) => {
-      console.log(error);
-    });*/
-    //SC.fetchScanCode(ReactNative.findNodeHandle(this.scannerComponentInstance),
-    //                               (response)=> console.log(response),(response,err) => console.log(err));
-  
-    //this._textInput.setNativeProps({text:"start scanning"})
-    
+
+    this._textInput.setNativeProps({text:"start scanning"});
+
     UIManager.dispatchViewManagerCommand(
       ReactNative.findNodeHandle(this.scannerComponentInstance),
       UIManager.ScannerView.Commands.fetchScanCode,
@@ -110,7 +100,7 @@ export default class App extends Component<Props> {
 
       
 
-      this._textInput.setNativeProps({text:"start scanning"});
+     
 
       ResultManager.checkValue(200000)
       .then(
@@ -136,45 +126,45 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'column',
+    
 
-    backgroundColor: '#F5FCFF',
+
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+
+  mainWindow: {
+    position: 'absolute',
+    width: 300,
+    height:300,
+    left:20,
+    top: 20,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  container1: {
-    position: 'relatvie',
-    bottom: 200,
-    left: 10,
-    right: 10,
-    top: 10
+  
+  scanWindow: {
+    flex:3,
+
+
   },
   container2: {
       flex: 1,
       flexDirection: 'row',
-      backgroundColor: 'green',
+      justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white'
   },
   scanHeight: {
     flex: 0.8,
     backgroundColor: '#FF3366'
   },
   button: {
-    marginTop: 50,
     width: 120,
     height: 60,
+    padding: 5,
     borderRadius: 12,
     borderWidth: 1,
+    textAlign: 'center',
+    textAlignVertical : 'middle',
     borderColor: '#F0F',
-    backgroundColor: "#FFF"
+    
   }
 });

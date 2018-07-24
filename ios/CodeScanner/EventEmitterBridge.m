@@ -1,4 +1,4 @@
-//
+///Users/jacokao/works/workingcopy/reactprjs/RNScanner/ios/RNSCanner.xcodeproj
 //  EventEmitterBridge.m
 //  RNSCanner
 //

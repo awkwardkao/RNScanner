@@ -99,7 +99,7 @@ class AVFScanner : UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
     previewLayer.cornerRadius = 5
     //let prevFrame = CGRect(x:view.frame.width * 0.1, y:view.frame.height * 0.1 , width:view.frame.width * 0.6 , height:view.frame.height * 0.6)
-    previewLayer.frame = view.layer.bounds.insetBy(dx: 60.0, dy: 60.0) //prevFrame //CGRect(x:0 , y:0, width:view.frame.width , height:view.frame.height) //view.layer.bounds
+    previewLayer.frame = view.layer.bounds//view.layer.bounds.insetBy(dx: 60.0, dy: 60.0) //prevFrame //CGRect(x:0 , y:0, width:view.frame.width , height:view.frame.height) //view.layer.bounds
     
     view.layer.addSublayer(previewLayer)
     
@@ -108,7 +108,7 @@ class AVFScanner : UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     codeFrameView!.layer.cornerRadius = 5
     codeFrameView!.layer.borderWidth = 2
     //let codeFrame = CGRect(x:view.frame.width * 0.2 , y: view.frame.height * 0.2 , width:view.frame.width * 0.2 , height:view.frame.height * 0.2)
-    codeFrameView!.layer.frame = view.layer.bounds.insetBy(dx:100.0, dy: 100.0) //codeFrame
+    codeFrameView!.layer.frame = view.layer.bounds;//view.layer.bounds.insetBy(dx:100.0, dy: 100.0) //codeFrame
     
     view.addSubview(codeFrameView!)
     view.bringSubview(toFront: codeFrameView!)
@@ -205,13 +205,7 @@ class AVFScanner : UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     //captureSession.stopRunning();
     
-    /*
-    if metadataObjects == nil {
-      codeFrameView?.frame = CGRect.zero
-    } else  {
-       let codeFrame = CGRect(x:view.frame.width * 0.4 , y: view.frame.height * 0.4 , width:view.frame.width * 0.6 , height:view.frame.height * 0.6)
-      codeFrameView?.frame = codeFrame //view.layer.bounds//CGRect(x:view.frame.width * 0.1 , y:view.frame.height * 0.1, width:view.frame.width * 0.5 , height:view.frame.height  * 0.5)
-    }*/
+    
     
     for data in metadataObjects {
       let metaData = data as! AVMetadataObject
