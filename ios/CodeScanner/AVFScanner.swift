@@ -97,9 +97,13 @@ class AVFScanner : UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     // set preview
     previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-    previewLayer.cornerRadius = 5
+    previewLayer.cornerRadius = 1
     //let prevFrame = CGRect(x:view.frame.width * 0.1, y:view.frame.height * 0.1 , width:view.frame.width * 0.6 , height:view.frame.height * 0.6)
-    previewLayer.frame = view.layer.bounds//view.layer.bounds.insetBy(dx: 60.0, dy: 60.0) //prevFrame //CGRect(x:0 , y:0, width:view.frame.width , height:view.frame.height) //view.layer.bounds
+    
+    let screenSize = UIScreen.main.bounds
+    let screenWidth = screenSize.width
+    let screenHeight = screenSize.height
+    previewLayer.frame = CGRect(x: 0.0, y:0.0, width: screenWidth, height: screenHeight*0.75) //, y: <#T##Int#>, width: <#T##Int#>, height: <#T##Int#>//view.layer.bounds//view.layer.bounds.insetBy(dx: 60.0, dy: 60.0) //prevFrame //CGRect(x:0 , y:0, width:view.frame.width , height:view.frame.height) //view.layer.bounds
     
     view.layer.addSublayer(previewLayer)
     
@@ -107,8 +111,27 @@ class AVFScanner : UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     codeFrameView!.layer.borderColor = UIColor.white.cgColor
     codeFrameView!.layer.cornerRadius = 5
     codeFrameView!.layer.borderWidth = 2
+    codeFrameView!.layer.frame = CGRect(x: screenWidth*0.25, y:screenHeight*0.75*0.25, width: screenWidth*0.5, height: screenHeight*0.75*0.5)
     //let codeFrame = CGRect(x:view.frame.width * 0.2 , y: view.frame.height * 0.2 , width:view.frame.width * 0.2 , height:view.frame.height * 0.2)
-    codeFrameView!.layer.frame = view.layer.bounds;//view.layer.bounds.insetBy(dx:100.0, dy: 100.0) //codeFrame
+    
+    
+    print("w = \(view.frame.width) , height = \(view.frame.height)")
+     print("w = \(previewLayer.frame.width) , height = \(previewLayer.frame.height)")
+    print("w = \(screenWidth) , height = \(screenHeight)")
+    //let w = view.frame.width
+    //let h = view.frame.height
+    
+    //let fw = w * 0.8
+    //let fh = h * 0.6
+    
+    //let fwhalf = 100
+    //let fhhalf = 100
+    
+    //let fx = 50//fw * 0.5 - fwhalf * 0.5
+    //let fy = 50// fh * 0.5 - fwhalf * 0.5
+    
+    //codeFrameView!.layer.frame = CGRect(x: fx, y: fy, width: fwhalf, height: fhhalf)//view.layer.bounds.insetBy(dx:100.0, dy: 100.0) //codeFrame
+    //codeFrameView!.layer.frame =
     
     view.addSubview(codeFrameView!)
     view.bringSubview(toFront: codeFrameView!)

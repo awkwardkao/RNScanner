@@ -19,13 +19,13 @@ class ResultManager: RCTEventEmitter {
     var mode = -1
     while(mode != 2) {
       mode = UserDefaults.standard.integer(forKey: "RunStep")
-      print(mode)
+      //print(mode)
       if(mode == 2) {
         break
         
       }
       usleep(200000)
-      print(mode)
+      //print(mode)
     }
     print("scan value ")
     let scanValue = UserDefaults.standard.string(forKey: "ScannedValue")
